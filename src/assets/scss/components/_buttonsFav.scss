@@ -1,0 +1,17 @@
+.btn-favorite {
+  background: transparent;
+  border: none;
+  color: #a8c4e0;
+  font-size: 1.1rem;
+  padding: 0.25rem 0.4rem;
+  transition: color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    color: #f59e0b;
+    transform: scale(1.2);
+  }
+
+  &.active {
+    color: #f59e0b; // estrella amarilla cuando está marcado
+  }
+}

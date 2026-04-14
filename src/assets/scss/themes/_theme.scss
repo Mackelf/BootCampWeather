@@ -1,0 +1,84 @@
+.app-wrapper {
+  min-height: 100vh;
+}
+
+// Tema global
+.app-theme-light {
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+.app-theme-dark {
+  background-color: #050816;
+  color: #f5f5f5;
+}
+
+// Base tarjeta
+.weather-card {
+  border-radius: 0.75rem;
+  color: #ffffff;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* --- MODO DARK: usa tus gradientes tal cual --- */
+.app-theme-dark {
+  .weather-card {
+    &.theme-day {
+      background: $card-bg-day;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &.theme-afternoon {
+      background: $card-bg-afternoon;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &.theme-night {
+      background: $card-bg-night;
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+/* --- MODO LIGHT: gradientes aclarados a partir de los colores base --- */
+.app-theme-light {
+  background-color: #f5f5f5;
+  color: #111;
+  .weather-card {
+    color: #123;
+
+    h1,h2,he,h4,h5 {
+      color: #111;
+    }
+
+    .home.muted {
+      color: #555 !important;
+    }
+    footer{
+      background-color: #e5e5e5;
+      color: #444;
+    }
+    &.theme-day {
+      $day-light-top: lighten($card-day-top, 25%);
+      $day-light-bottom: lighten($card-day-bottom, 25%);
+      background: linear-gradient(180deg, $day-light-top 0%, $day-light-bottom 100%);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    &.theme-afternoon {
+      $aft-light-top: lighten($card-afternoon-top, 25%);
+      $aft-light-bottom: lighten($card-afternoon-bottom, 25%);
+      background: linear-gradient(180deg, $aft-light-top 0%, $aft-light-bottom 100%);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    &.theme-night {
+      $night-light-top: lighten($card-night-top, 35%);
+      $night-light-bottom: lighten($card-night-bottom, 35%);
+      background: linear-gradient(180deg, $night-light-top 0%, $night-light-bottom 100%);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+}
