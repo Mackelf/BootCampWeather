@@ -29,7 +29,6 @@ const onSubmit = async () => {
       password: password.value,
     });
 
-    // si venía de una ruta protegida, volvemos ahí
     const redirect = route.query.redirect || '/';
     router.push(redirect);
   } catch (e) {
@@ -46,17 +45,17 @@ const onSubmit = async () => {
 
     <form class="col-md-4" @submit.prevent="onSubmit">
       <div class="mb-3">
-        <label class="form-label">Email</label>
+        abel class="form-label">Email</label>
         <input
           v-model="email"
           type="email"
           class="form-control"
-          placeholder="mario@example.com"
+          placeholder="mario@bootcampweather.cl"
         />
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Contraseña</label>
+        abel class="form-label">Contraseña</label>
         <input
           v-model="password"
           type="password"
@@ -69,16 +68,17 @@ const onSubmit = async () => {
 
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn btn-primary w-100"
         :disabled="!isValid || isSubmitting"
       >
         {{ isSubmitting ? 'Ingresando...' : 'Entrar' }}
       </button>
+
+      <!-- ✅ link al registro, dentro del form y del section -->
+      <p class="text-center mt-3 small">
+        ¿No tienes cuenta?
+        <router-link to="/registro">Regístrate aquí</router-link>
+      </p>
     </form>
   </section>
-
-  <p class="text-center mt-3 small login-card__subtitle">
-  ¿No tienes cuenta?
-  <router-link to="/registro">Regístrate aquí</router-link>
-</p>
 </template>
