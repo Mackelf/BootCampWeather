@@ -1,5 +1,5 @@
 // src/store/auth.js
-import { mockUsers } from '@/mock/users';
+import { getUsers, saveUser } from '@/mock/users';
 
 export default {
   namespaced: true,
@@ -28,12 +28,10 @@ export default {
     },
     TOGGLE_FAVORITE(state, { city, country }) {
       if (!state.user) return;
-
       const favorites = state.user.favorites || [];
       const index = favorites.findIndex(
         (f) => f.city === city && f.country === country,
       );
-
       if (index === -1) {
         state.user = {
           ...state.user,
@@ -49,13 +47,39 @@ export default {
   },
   actions: {
     login({ commit }, { email, password }) {
-      const user = mockUsers.find(
+      const users = getUsers(); // ← incluye mock + localStorage
+      const user = users.find(
         (u) => u.email === email && u.password === password,
       );
       if (!user) {
         throw new Error('Usuario o contraseña incorrectos');
       }
       commit('SET_USER', user);
+    },
+    register({ dispatch }, { name, email, password }) {
+      const users = getUsers();
+
+      // verificar email duplicado
+      const exists = users.find((u) => u.email === email);
+      if (exists) {
+        throw new Error('Ya existe una cuenta con ese correo');
+      }
+
+      // crear nuevo usuario
+      const newUser = {
+        id: Date.now(),
+        name,
+        email,
+        password,
+        preferences: { unit: 'C', theme: 'dark' },
+        favorites: [],
+      };
+
+      // guardar en localStorage
+      saveUser(newUser);
+
+      // loguear automáticamente
+      return dispatch('login', { email, password });
     },
     logout({ commit }) {
       commit('LOGOUT');

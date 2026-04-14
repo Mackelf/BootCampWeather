@@ -76,4 +76,9 @@ const onSubmit = async () => {
       </button>
     </form>
   </section>
+
+  <p class="text-center mt-3 small login-card__subtitle">
+  ¿No tienes cuenta?
+  <router-link to="/registro">Regístrate aquí</router-link>
+</p>
 </template>

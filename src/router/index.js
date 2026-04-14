@@ -10,6 +10,7 @@ import AboutView from '../views/AboutView.vue';
 import LoginView from '../views/LoginView.vue';
 import FavoritesView from '../views/FavoritesView.vue';
 import PreferencesView from '../views/PreferencesView.vue';
+import RegisterView from '../views/RegisterView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 2. usar createWebHashHistory() sin parámetros
@@ -46,6 +47,11 @@ const router = createRouter({
       component: LoginView,
     },
     {
+      path: '/registro',
+      name: 'registro',
+      component: RegisterView,
+    },
+        {
       path: '/favoritos',
       name: 'favoritos',
       component: FavoritesView,
