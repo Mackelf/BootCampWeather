@@ -45,7 +45,7 @@ const onSubmit = async () => {
 
     <form class="col-md-4" @submit.prevent="onSubmit">
       <div class="mb-3">
-        abel class="form-label">Email</label>
+        <label class="form-label">Email</label>
         <input
           v-model="email"
           type="email"
@@ -55,7 +55,7 @@ const onSubmit = async () => {
       </div>
 
       <div class="mb-3">
-        abel class="form-label">Contraseña</label>
+        <label class="form-label">Contraseña</label>
         <input
           v-model="password"
           type="password"
@@ -74,7 +74,6 @@ const onSubmit = async () => {
         {{ isSubmitting ? 'Ingresando...' : 'Entrar' }}
       </button>
 
-      <!-- ✅ link al registro, dentro del form y del section -->
       <p class="text-center mt-3 small">
         ¿No tienes cuenta?
         <router-link to="/registro">Regístrate aquí</router-link>
