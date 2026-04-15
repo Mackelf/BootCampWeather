@@ -275,13 +275,58 @@ Las preferencias se guardan en Vuex y se consumen en:
 
 ## 🏙️ Ciudades cubiertas
 
-**Chile (16 ciudades)**  
+**Chile 🇨🇱 (16 ciudades)**
 Arica · Iquique · Antofagasta · Copiapó · La Serena · Valparaíso · Santiago · Rancagua · Talca · Chillán · Concepción · Temuco · Valdivia · Puerto Montt · Coyhaique · Punta Arenas
 
-**Argentina (24 ciudades)**  
+**Argentina 🇦🇷 (24 ciudades)**
 Buenos Aires · Córdoba · Rosario · Posadas · San Salvador de Jujuy · Catamarca · Formosa · Resistencia · Paraná · San Juan · San Luis · Santa Rosa · Neuquén · Rawson · Viedma · Río Gallegos · Ushuaia · Bahía Blanca · Sgo. del Estero · Tucumán · Salta · La Plata · Mendoza · La Rioja
 
+**Bolivia 🇧🇴 (9 ciudades)**
+Cobija · Trinidad · El Alto · La Paz · Cochabamba · Santa Cruz de la Sierra · Oruro · Sucre · Potosí
+
+**Perú 🇵🇪 (8 ciudades)**
+Piura · Chiclayo · Trujillo · Huánuco · Lima · Huancayo · Cusco · Arequipa
+
+**Colombia 🇨🇴 (8 ciudades)**
+Santa Marta · Barranquilla · Cartagena · Medellín · Bucaramanga · Cúcuta · Bogotá · Cali
+
+**Ecuador 🇪🇨 (8 ciudades)**
+Esmeraldas · Ibarra · Quito · Manta · Ambato · Guayaquil · Cuenca · Loja
+
+**Venezuela 🇻🇪 (8 ciudades)**
+Maracaibo · Barquisimeto · Valencia · Maracay · Caracas · Barcelona · Ciudad Bolívar · Ciudad Guayana
+
+**Paraguay 🇵🇾 (8 ciudades)**
+Pedro Juan Caballero · Concepción · San Lorenzo · Asunción · Capiatá · Ciudad del Este · Encarnación · Pilar
+
+**Uruguay 🇺🇾 (8 ciudades)**
+Artigas · Salto · Paysandú · Fray Bentos · Durazno · Minas · Montevideo · Punta del Este
+
+**Brasil 🇧🇷 (8 ciudades)**
+Belém · Fortaleza · Recife · Salvador · Brasília · Rio de Janeiro · São Paulo · Porto Alegre
+
+**México 🇲🇽 (8 ciudades)**
+Tijuana · Hermosillo · Chihuahua · Monterrey · Guadalajara · Ciudad de México · Puebla · Mérida
+
 ---
+**Total: 11 países · 103 ciudades cubiertas**
+
+
+### Caché independiente por país
+
+| País       | Clave localStorage          | TTL    |
+|------------|-----------------------------|--------|
+| Chile      | `weatherCache_chile`        | 6 horas|
+| Argentina  | `weatherCache_argentina`    | 6 horas|
+| Bolivia    | `weatherCache_bolivia`      | 6 horas|
+| Perú       | `weatherCache_peru`         | 6 horas|
+| Colombia   | `weatherCache_colombia`     | 6 horas|
+| Ecuador    | `weatherCache_ecuador`      | 6 horas|
+| Venezuela  | `weatherCache_venezuela`    | 6 horas|
+| Paraguay   | `weatherCache_paraguay`     | 6 horas|
+| Uruguay    | `weatherCache_uruguay`      | 6 horas|
+| Brasil     | `weatherCache_brasil`       | 6 horas|
+| México     | `weatherCache_mexico`       | 6 horas|
 
 ## 🏃 Cómo correr el proyecto localmente
 
@@ -333,6 +378,15 @@ npm run dev
 
 - Documentación:
   - README actualizado con nuevas rutas, estructura de archivos, APIs usadas y pasos para configurar `.env.local` con `VITE_NEWS_API_KEY`.
+
+  ### Iteración: Expansión de cobertura geográfica
+
+- Agregados 9 nuevos países: Bolivia 🇧🇴, Perú 🇵🇪, Colombia 🇨🇴, Ecuador 🇪🇨, Venezuela 🇻🇪, Paraguay 🇵🇾, Uruguay 🇺🇾, Brasil 🇧🇷 y México 🇲🇽.
+- Total: 11 países y 103 ciudades cubiertas con Open-Meteo.
+- Caché independiente por país con TTL de 6 horas para cada uno.
+- Arquitectura `weatherConfig.js` extensible sin modificar la lógica de vistas.
+- Registro de usuario con persistencia en `localStorage` agregado en `/registro`.
+- Deploy configurado en GitHub Pages desde rama `gh-pages`.
   
 ## 👤 Autor
 
