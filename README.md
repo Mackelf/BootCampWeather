@@ -26,44 +26,60 @@ Aplicación web SPA que muestra el **clima actual y el pronóstico de 7 días** 
 
 ```text
 src/
+├── App.vue                         # Componente raíz, aplica tema global
+├── main.js                         # Punto de entrada, monta la app
+│
 ├── api/
-│   ├── http.js            # Cliente Axios base
-│   ├── newsApi.js         # Integración con NewsAPI.org (noticias de clima)
-│   └── weatherApi.js      # (opcional) wrapper Axios para Open-Meteo
+│   ├── http.js                     # Cliente Axios base con interceptores
+│   ├── newsApi.js                  # Integración NewsAPI.org (noticias clima)
+│   └── weatherApi.js               # Wrapper Axios para Open-Meteo
+│
 ├── assets/
+│   └── scss/
+│       ├── main.scss               # Punto de entrada SCSS
+│       ├── abstracts/
+│       │   └── _variables.scss     # Variables globales (colores, gradientes)
+│       ├── base/
+│       │   └── _reset.scss         # Reset y estilos base
+│       ├── components/
+│       │   ├── _buttonsFav.scss    # Estilos botón favorito ⭐
+│       │   ├── _favorite-card.scss # Tarjeta de favoritos
+│       │   ├── _news-card.scss     # Tarjeta de noticias
+│       │   └── _weather-card.scss  # Tarjeta de clima
+│       ├── layout/
+│       │   └── _header.scss        # Estilos del header/navbar
+│       └── themes/
+│           └── _theme.scss         # Temas dark/light + day/afternoon/night
+│
 ├── components/
-│   ├── Navbar.vue         # Barra de navegación con login/logout
-│   └── WeatherCard.vue    # Tarjeta reutilizable de clima
+│   ├── Navbar.vue                  # Barra de navegación con login/logout
+│   └── WeatherCard.vue             # Tarjeta reutilizable de clima
+│
+├── mock/
+│   └── users.js                    # Usuarios mock + persistencia localStorage
+│
 ├── router/
-│   └── index.js           # Rutas de la SPA + guards de autenticación
+│   └── index.js                    # Rutas SPA + guards de autenticación
+│
 ├── store/
-│   └── auth.js            # Módulo Vuex: usuario, login/logout, preferencias
-├── styles/
-│   ├── abstracts/
-│   │   ├── _variables.scss   # Variables globales (colores, tipografía, gradientes)
-│   │   └── _mixins.scss      # Mixins reutilizables
-│   ├── base/
-│   │   └── _reset.scss       # Reset y estilos base del body
-│   ├── components/
-│   │   ├── _weather-card.scss # Estilos de la tarjeta de clima
-│   │   └── _news-card.scss    # Estilos de la tarjeta de noticia
-│   ├── layout/
-│   │   └── _header.scss       # Estructura del header
-│   ├── themes/
-│   │   └── _themes.scss       # Temas visuales: dark/light + day/afternoon/night
-│   └── main.scss              # Punto de entrada SCSS
+│   ├── index.js                    # Store raíz de Vuex
+│   └── auth.js                     # Módulo auth: usuario, login, preferencias
+│
 ├── utils/
-│   ├── weatherConfig.js    # Configuración de países, ciudades y URLs
-│   ├── weatherHelpers.js   # Helpers de clima: caché, normalización, iconos, stats
-│   └── temperature.js      # Helpers para formatear temperaturas °C/°F
+│   ├── temperature.js              # Helpers para formatear °C/°F
+│   ├── weatherConfig.js            # Configuración de 11 países y ciudades
+│   └── weatherHelpers.js           # Caché, normalización, iconos, stats
+│
 └── views/
-    ├── HomeView.vue         # Dashboard con clima de capitales
-    ├── PronosticosView.vue  # Listado de ciudades por país
-    ├── LugarDetalleView.vue # Detalle semanal de una ciudad
-    ├── NewsView.vue         # Noticias de clima usando NewsAPI
-    ├── PreferencesView.vue  # Preferencias de usuario (unidad, tema)
-    ├── FavoritesView.vue    # Lista de ciudades favoritas del usuario
-    └── LoginView.vue        # Login de usuario (simulado con Vuex)
+    ├── HomeView.vue                # Dashboard con capitales
+    ├── PronosticosView.vue         # Listado de ciudades por país
+    ├── LugarDetalleView.vue        # Detalle y forecast 7 días por ciudad
+    ├── NewsView.vue                # Noticias de clima en español
+    ├── LoginView.vue               # Inicio de sesión simulado
+    ├── RegisterView.vue            # Registro de nuevo usuario
+    ├── FavoritesView.vue           # Lugares favoritos (requiere login)
+    ├── PreferencesView.vue         # Preferencias °C/°F y tema (requiere login)
+    └── AboutView.vue               # Información del autor
 ```
 
 ---
