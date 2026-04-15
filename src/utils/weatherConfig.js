@@ -72,13 +72,38 @@ export const COUNTRIES = {
       '&daily=weather_code,temperature_2m_max,temperature_2m_min' +
       '&timezone=America/Argentina/Buenos_Aires',
   },
-
+bolivia: {
+  label: 'Bolivia 🇧🇴',
+  capital: 'Sucre',
+  cacheKey: 'weatherCache_bolivia',
+  timezone: 'America/La_Paz',
+  cities: [
+    'Cobija',
+    'Trinidad',
+    'El Alto',
+    'La Paz',
+    'Cochabamba',
+    'Santa Cruz de la Sierra',
+    'Oruro',
+    'Sucre',
+    'Potosí',
+  ],
+  apiUrl:
+    'https://api.open-meteo.com/v1/forecast' +
+    '?latitude=-11.0267,-14.8333,-16.5,-16.5,-17.3895,-17.7863,-17.9833,-19.0333,-19.5836' +
+    '&longitude=-68.7692,-64.9,-68.15,-68.15,-66.1568,-63.1812,-67.15,-65.2627,-65.7531' +
+    '&current=temperature_2m,weather_code' +
+    '&daily=weather_code,temperature_2m_max,temperature_2m_min' +
+    '&timezone=America%2FLa_Paz' +
+    '&forecast_days=8',
+},
   // aquí luego agregas más países
 }
 
 export const localeMap = {
   chile: 'es-CL',
   argentina: 'es-AR',
+  bolivia: 'es-BO',
   // peru: 'es-PE',
   // brasil: 'pt-BR',
 }
