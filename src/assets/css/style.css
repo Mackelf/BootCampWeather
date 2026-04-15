@@ -141,26 +141,25 @@ body {
 
 .app-wrapper {
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.app-theme-light {
-  background-color: #f5f5f5;
-  color: #222;
+.weather-card {
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+.weather-card h1, .weather-card h2, .weather-card h3, .weather-card h4, .weather-card h5 {
+  margin-bottom: 0.5rem;
 }
 
 .app-theme-dark {
   background-color: #050816;
   color: #f5f5f5;
 }
-
-.weather-card {
-  border-radius: 0.75rem;
+.app-theme-dark .weather-card {
   color: #ffffff;
-  border: 1px solid transparent;
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
-/* --- MODO DARK: usa tus gradientes tal cual --- */
 .app-theme-dark .weather-card.theme-day {
   background: linear-gradient(180deg, #1a3a5c 0%, #0f2744 100%);
   border-color: rgba(255, 255, 255, 0.08);
@@ -175,34 +174,35 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* --- MODO LIGHT: gradientes aclarados a partir de los colores base --- */
 .app-theme-light {
-  background-color: #f5f5f5;
-  color: #111;
+  background-color: #f0f4f8;
+  color: #1a2a3a;
 }
 .app-theme-light .weather-card {
   color: #123;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
-.app-theme-light .weather-card h1, .app-theme-light .weather-card h2, .app-theme-light .weather-card he, .app-theme-light .weather-card h4, .app-theme-light .weather-card h5 {
+.app-theme-light .weather-card h1, .app-theme-light .weather-card h2, .app-theme-light .weather-card h3, .app-theme-light .weather-card h4, .app-theme-light .weather-card h5 {
   color: #111;
 }
 .app-theme-light .weather-card .home.muted {
   color: #555 !important;
 }
 .app-theme-light .weather-card footer {
-  background-color: #e5e5e5;
+  background-color: rgba(0, 0, 0, 0.05);
   color: #444;
+  border-radius: 0 0 0.75rem 0.75rem;
 }
 .app-theme-light .weather-card.theme-day {
-  background: linear-gradient(180deg, rgb(54.093220339, 120.6694915254, 191.406779661) 0%, rgb(38.0421686747, 98.9096385542, 172.4578313253) 100%);
+  background: linear-gradient(180deg, white 0%, rgb(128.3050847458, 172.3728813559, 219.1949152542) 100%);
   border-color: rgba(0, 0, 0, 0.06);
 }
 .app-theme-light .weather-card.theme-afternoon {
-  background: linear-gradient(180deg, rgb(250.0196850394, 206.6909448819, 133.4803149606) 0%, rgb(232.9709302326, 108.1395348837, 66.5290697674) 100%);
+  background: linear-gradient(180deg, white 0%, rgb(253.031496063, 235.905511811, 206.968503937) 100%);
   border-color: rgba(0, 0, 0, 0.06);
 }
 .app-theme-light .weather-card.theme-night {
-  background: linear-gradient(180deg, rgb(94.2415730337, 124.2134831461, 173.2584269663) 0%, rgb(16.28, 48.84, 187.22) 100%);
+  background: linear-gradient(180deg, #f1f5f9 0%, rgb(144.9550561798, 165.4719101124, 199.0449438202) 100%);
   border-color: rgba(0, 0, 0, 0.08);
 }
 
