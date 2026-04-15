@@ -47,21 +47,21 @@
     margin-top: 0.25rem;
     font-size: 0.9rem;
     letter-spacing: 0.08em;
-    color: $color-text-muted;
+    color: #475569 !important;
   }
 
   .temp-range {
-    color: $color-text-muted;
+    color: #475569 !important;
   }
 
   .btn-detalles {
     align-self: flex-end;
     font-size: 0.8rem;
     padding-inline: 0;
-    color: $color-primary;
+    color: #2563eb !important;
 
     &:hover {
-      color: lighten($color-primary, 15%);
+      color: #1d4ed8 !important;
     }
   }
 }

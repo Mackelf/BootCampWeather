@@ -20,7 +20,7 @@ body {
   border: 1px solid #2a5a8c;
   border-radius: 0.75rem;
   overflow: hidden;
-  color: #ffffff;
+  color: #475569 !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .favorite-card:hover {
@@ -80,19 +80,19 @@ body {
   margin-top: 0.25rem;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
-  color: #a8c4e0;
+  color: #475569 !important;
 }
 .weather-card .temp-range {
-  color: #a8c4e0;
+  color: #475569 !important;
 }
 .weather-card .btn-detalles {
   align-self: flex-end;
   font-size: 0.8rem;
   padding-inline: 0;
-  color: #4a9edd;
+  color: #2563eb !important;
 }
 .weather-card .btn-detalles:hover {
-  color: rgb(138.4023255814, 192.5139534884, 233.0976744186);
+  color: #1d4ed8 !important;
 }
 
 .btn-favorite {
@@ -179,11 +179,11 @@ body {
   color: #1a2a3a;
 }
 .app-theme-light .weather-card {
-  color: #123;
+  color: #1a2a3a !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 .app-theme-light .weather-card h1, .app-theme-light .weather-card h2, .app-theme-light .weather-card h3, .app-theme-light .weather-card h4, .app-theme-light .weather-card h5 {
-  color: #111;
+  color: #0f172a;
 }
 .app-theme-light .weather-card .home.muted {
   color: #555 !important;

@@ -49,11 +49,11 @@
   color: #1a2a3a;
 
   .weather-card {
-    color: #123;
+    color: #1a2a3a !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Sombra suave en lugar de borde fuerte
 
     h1, h2, h3, h4, h5 {
-      color: #111;
+      color: #0f172a;
     }
 
     .home.muted {
