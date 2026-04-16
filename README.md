@@ -350,7 +350,7 @@ Luego abre la URL que Vite indique en consola (por defecto `http://localhost:517
 
 ---
 
-## 📸 Capturas (sugerido para el portfolio)
+## 📸 Capturas
 
 
 
@@ -367,6 +367,10 @@ Lista de ciudades favoritas con tema oscuro activado.
 
 ---
 
+##  Demo Disponible en:
+[BootCampWeather](https://mackelf.github.io/BootCampWeather/#/)
+
+---
 ## 📌 Estado del proyecto
 
 - ✅ SPA completa en Vue 3 con Vue Router.
