@@ -1,23 +1,39 @@
-.header {
-  &__title {
-    font-weight: 600;
-  }
-}
-// scss/layout/_header.scss o similar
+// scss/layout/_header.scss
+
 .navbar {
-  transition: all 0.3s ease;
-  
-  .app-theme-light & {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    .nav-link { color: #1a2a3a; }
+  // 1. Usamos las variables definidas en _theme.scss
+  background-color: var(--nav-bg) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  padding: 0.75rem 1rem;
+
+  // 2. Título o Logo
+  .navbar-brand, &__title {
+    color: var(--nav-text) !important;
+    font-weight: 600;
+    transition: color 0.3s ease;
   }
 
-  .app-theme-dark & {
-    background-color: rgba(5, 8, 22, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    .nav-link { color: #f5f5f5; }
+  // 3. Enlaces de navegación
+  .nav-link {
+    color: var(--nav-text) !important;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &.active {
+      font-weight: 600;
+      border-bottom: 2px solid var(--card-link);
+    }
+  }
+
+  // 4. Texto de bienvenida y otros elementos
+  .user-welcome-text {
+    color: var(--nav-text);
+    font-size: 0.9rem;
   }
 }

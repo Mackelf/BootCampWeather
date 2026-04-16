@@ -8,6 +8,11 @@
   --card-link: #60a5fa;
   --card-border: rgba(255, 255, 255, 0.1);
 
+  // Contrato para el Navbar
+  --nav-bg: rgba(255, 255, 255, 0.9); // Un blanco semitransparente (Glassmorphism)
+  --nav-text: #1e293b;        // Texto gris oscuro legible
+  --nav-border: rgba(0, 0, 0, 0.08); // Borde inferior suave
+
   .weather-card, .home-card {
     &.theme-day { --card-bg: #{$card-bg-day-dark}; }
     &.theme-afternoon { --card-bg: #{$card-bg-afternoon-dark}; }
@@ -22,6 +27,11 @@
   --card-text-secondary: #475569;
   --card-link: #2563eb;
   --card-border: rgba(0, 0, 0, 0.08);
+
+// Contrato para el Navbar
+  --nav-bg: #1a1d2e;          // Un gris azulado oscuro (puedes usar tu $color-bg original)
+  --nav-text: #f5f5f5;        // Texto blanco
+  --nav-border: transparent;  // Sin borde inferior
 
   .weather-card, .home-card {
     // Aquí usamos los pasteles ($light-...)

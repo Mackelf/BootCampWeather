@@ -12,28 +12,33 @@ body {
   min-height: 100vh;
 }
 
-.header__title {
-  font-weight: 600;
-}
-
 .navbar {
-  transition: all 0.3s ease;
-}
-.app-theme-light .navbar {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--nav-bg) !important;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  padding: 0.75rem 1rem;
 }
-.app-theme-light .navbar .nav-link {
-  color: #1a2a3a;
+.navbar .navbar-brand, .navbar__title {
+  color: var(--nav-text) !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
-.app-theme-dark .navbar {
-  background-color: rgba(5, 8, 22, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.navbar .nav-link {
+  color: var(--nav-text) !important;
+  font-size: 0.95rem;
+  transition: color 0.3s ease, opacity 0.2s ease;
 }
-.app-theme-dark .navbar .nav-link {
-  color: #f5f5f5;
+.navbar .nav-link:hover {
+  opacity: 0.7;
+}
+.navbar .nav-link.active {
+  font-weight: 600;
+  border-bottom: 2px solid var(--card-link);
+}
+.navbar .user-welcome-text {
+  color: var(--nav-text);
+  font-size: 0.9rem;
 }
 
 .favorite-card {
@@ -167,6 +172,9 @@ body {
   --card-text-secondary: rgba(255, 255, 255, 0.65);
   --card-link: #60a5fa;
   --card-border: rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --nav-text: #1e293b;
+  --nav-border: rgba(0, 0, 0, 0.08);
 }
 .app-theme-dark .weather-card.theme-day, .app-theme-dark .home-card.theme-day {
   --card-bg: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
@@ -185,6 +193,9 @@ body {
   --card-text-secondary: #475569;
   --card-link: #2563eb;
   --card-border: rgba(0, 0, 0, 0.08);
+  --nav-bg: #1a1d2e;
+  --nav-text: #f5f5f5;
+  --nav-border: transparent;
 }
 .app-theme-light .weather-card.theme-day, .app-theme-light .home-card.theme-day {
   --card-bg: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
