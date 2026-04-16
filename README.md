@@ -1,421 +1,370 @@
-# 🌤️ BootCamp Weather
+# 🌦️ WeatherFront – App de Clima (Portafolio final)
 
-Proyecto de portfolio desarrollado como evidencia del aprendizaje en el Bootcamp de Desarrollo Frontend — Talento Digital / SENCE.
+Aplicación SPA en Vue 3 que muestra el clima actual y el pronóstico de 7 días para distintas ciudades de Latinoamérica, con temas claro/oscuro, manejo de estado global con Vuex, favoritos, estadísticas semanales y alertas meteorológicas.
 
-Aplicación web SPA que muestra el **clima actual y el pronóstico de 7 días** para ciudades de Chile y Argentina. Consume la API pública de Open-Meteo sin necesidad de API key, aplica caché local independiente por país, y adapta su paleta visual según la hora del día y las preferencias del usuario (tema claro/oscuro, unidades °C/°F).
-
----
-
-## 🚀 Tecnologías utilizadas
-
-- **Vue.js 3** — Composition API, `<script setup>`
-- **Vue Router 4** — navegación SPA sin recarga
-- **Vuex 4** — estado global de autenticación y preferencias de usuario
-- **Vite** — entorno de desarrollo y build
-- **Axios** — cliente HTTP para APIs de clima y noticias
-- **Bootstrap 5** — grilla y utilidades
-- **Bootstrap Icons** — íconos de clima y UI
-- **SCSS** — estilos propios con variables, BEM y patrón 7-1
-- **Open-Meteo API** — datos meteorológicos gratuitos y sin API key
-- **NewsAPI.org** — noticias de clima en español (endpoint `everything`)
-- **localStorage** — caché por país con TTL de 6 horas
+Este proyecto corresponde a la **entrega final de portafolio del Bootcamp Talento Digital (Sence)** y está pensado para ser mostrado en un portfolio profesional de FrontEnd.
 
 ---
 
-## 📁 Estructura del proyecto
+## 🚀 Tecnologías principales
 
-```text
-src/
-├── App.vue                         # Componente raíz, aplica tema global
-├── main.js                         # Punto de entrada, monta la app
+- **Vue 3** (Composition API)
+- **Vue Router** (SPA con múltiples vistas)
+- **Vuex** (manejo de estado global)
+- **Vite** (tooling y dev server)
+- **Axios** (consumo de APIs externas)
+- **SASS/SCSS** (temas, variables y organización de estilos)
+- **Bootstrap Icons** (iconografía del clima y UI)
+
+---
+---
+
+## 📂 Estructura del proyecto
+
+Vista simplificada de los directorios y archivos más relevantes:
+
+```bash
+BootCampWeather/
+├─ App.vue
+├─ main.js
 │
-├── api/
-│   ├── http.js                     # Cliente Axios base con interceptores
-│   ├── newsApi.js                  # Integración NewsAPI.org (noticias clima)
-│   └── weatherApi.js               # Wrapper Axios para Open-Meteo
+├─ api/
+│  ├─ http.js           # Cliente Axios base (config común)
+│  ├─ newsApi.js        # Llamadas a NewsAPI (noticias LATAM)
+│  └─ weatherApi.js     # Llamadas a Open-Meteo y helpers de clima
 │
-├── assets/
-│   └── scss/
-│       ├── main.scss               # Punto de entrada SCSS
-│       ├── abstracts/
-│       │   └── _variables.scss     # Variables globales (colores, gradientes)
-│       ├── base/
-│       │   └── _reset.scss         # Reset y estilos base
-│       ├── components/
-│       │   ├── _buttonsFav.scss    # Estilos botón favorito ⭐
-│       │   ├── _favorite-card.scss # Tarjeta de favoritos
-│       │   ├── _news-card.scss     # Tarjeta de noticias
-│       │   └── _weather-card.scss  # Tarjeta de clima
-│       ├── layout/
-│       │   └── _header.scss        # Estilos del header/navbar
-│       └── themes/
-│           └── _theme.scss         # Temas dark/light + day/afternoon/night
+├─ assets/
+│  ├─ css/
+│  │  ├─ style.css      # CSS generado por SASS
+│  │  └─ style.css.map
+│  │
+│  └─ scss/
+│     ├─ main.scss      # Punto de entrada SASS
+│     │
+│     ├─ abstracts/
+│     │  └─ _variables.scss     # Variables, mixins, tokens de color/tema
+│     │
+│     ├─ base/
+│     │  └─ _reset.scss         # Reset / estilos base globales
+│     │
+│     ├─ components/
+│     │  ├─ _buttonsFav.scss    # Botones de favorito (estrellas)
+│     │  ├─ _favorite-card.scss # Tarjeta de favoritos
+│     │  ├─ _news-card.scss     # Tarjetas de noticias
+│     │  ├─ _searchInput.scss   # Inputs de búsqueda/select país
+│     │  └─ _weather-card.scss  # Tarjetas de clima principales
+│     │
+│     ├─ layout/
+│     │  └─ _header.scss        # Navbar / cabecera
+│     │
+│     ├─ pages/                 # (reservado para estilos específicos de vistas)
+│     │
+│     ├─ themes/
+│     │  └─ _theme.scss         # Definición de temas light/dark (CSS variables)
+│     │
+│     └─ vendors/               # Espacio para estilos de terceros (si aplica)
 │
-├── components/
-│   ├── Navbar.vue                  # Barra de navegación con login/logout
-│   └── WeatherCard.vue             # Tarjeta reutilizable de clima
+├─ components/
+│  ├─ Navbar.vue        # Barra de navegación principal (tema reactivo)
+│  ├─ WeatherCard.vue   # Tarjeta de pronóstico destacado
+│  └─ WelcomeItem.vue   # Componente de bienvenida / contenido informativo
 │
-├── mock/
-│   └── users.js                    # Usuarios mock + persistencia localStorage
+├─ mock/
+│  └─ users.js          # Usuarios mock para flujo de autenticación
 │
-├── router/
-│   └── index.js                    # Rutas SPA + guards de autenticación
+├─ router/
+│  └─ index.js          # Definición de rutas de la SPA
 │
-├── store/
-│   ├── index.js                    # Store raíz de Vuex
-│   └── auth.js                     # Módulo auth: usuario, login, preferencias
+├─ store/
+│  ├─ index.js          # Configuración principal de Vuex
+│  └─ auth.js           # Módulo de autenticación, usuario, favoritos, prefs
 │
-├── utils/
-│   ├── temperature.js              # Helpers para formatear °C/°F
-│   ├── weatherConfig.js            # Configuración de 11 países y ciudades
-│   └── weatherHelpers.js           # Caché, normalización, iconos, stats
+├─ utils/
+│  ├─ temperature.js    # Helpers de formato y unidades (°C/°F)
+│  ├─ weatherConfig.js  # Países, ciudades, coordenadas, cache keys, locales
+│  └─ weatherHelpers.js # Normalización de datos, códigos de clima, estadísticas
 │
-└── views/
-    ├── HomeView.vue                # Dashboard con capitales
-    ├── PronosticosView.vue         # Listado de ciudades por país
-    ├── LugarDetalleView.vue        # Detalle y forecast 7 días por ciudad
-    ├── NewsView.vue                # Noticias de clima en español
-    ├── LoginView.vue               # Inicio de sesión simulado
-    ├── RegisterView.vue            # Registro de nuevo usuario
-    ├── FavoritesView.vue           # Lugares favoritos (requiere login)
-    ├── PreferencesView.vue         # Preferencias °C/°F y tema (requiere login)
-    └── AboutView.vue               # Información del autor
+└─ views/
+   ├─ AboutView.vue         # Información del proyecto / Quienes somos
+   ├─ FavoritesView.vue     # Ciudades favoritas del usuario (requiere login)
+   ├─ HomeView.vue          # Home / landing
+   ├─ LoginView.vue         # Login (flujo de autenticación mock)
+   ├─ LugarDetalleView.vue  # Detalle de ciudad + resumen semanal y alertas
+   ├─ NewsView.vue          # Noticias relacionadas (NewsAPI)
+   ├─ PreferencesView.vue   # Preferencias de unidad, tema, etc.
+   ├─ PronosticosView.vue   # Pronósticos destacados por país/ciudad
+   └─ RegisterView.vue      # Registro de usuario (mock / demo)
+```
+## ☁️ APIs utilizadas
+
+### Open-Meteo
+
+Se utiliza la API de **Open-Meteo** para obtener:
+
+- Clima actual por ciudad (temperatura, código de clima, etc.).
+- Pronóstico diario de 7 días (mínimas, máximas y códigos de clima).
+
+Los datos crudos se normalizan en `weatherHelpers.js` mediante `normalizeLocations`, generando una estructura común para todos los países.
+
+### NewsAPI (noticias relacionadas)
+
+En la vista de noticias (`/news`) se consumen titulares en español de varios países de LATAM usando **NewsAPI**.  
+La clave se configura mediante una variable de entorno:
+
+```bash
+VITE_NEWS_API_KEY=TU_API_KEY_AQUI
 ```
 
----
-
-## 🗺️ Rutas disponibles
-
-| Ruta                           | Vista              | Descripción                                              |
-|--------------------------------|--------------------|----------------------------------------------------------|
-| `/`                            | HomeView           | Dashboard con capitales y accesos                        |
-| `/pronosticos`                 | PronosticosView    | Listado de ciudades por país                             |
-| `/pronosticos/:country/:city`  | LugarDetalleView   | Detalle y forecast 7 días por ciudad                     |
-| `/news`                        | NewsView           | Noticias de clima en español (NewsAPI)                   |
-| `/login`                       | LoginView          | Inicio de sesión simulado                                |
-| `/favoritos`                   | FavoritesView      | Lugares favoritos del usuario (requiere login)           |
-| `/preferencias`                | PreferencesView    | Unidad °C/°F y tema claro/oscuro (requiere login)        |
-| `/about`                       | QuienesSomosView   | Información del autor                                    |
+El consumo se hace con Axios, manejando estados de carga y errores básicos.
 
 ---
 
-## ⚙️ Funcionalidades principales
+## 🧠 Lógica de clima, códigos y estadísticas
 
-- Pronósticos por ciudad con temperatura actual, mínima y máxima.
-- Selector de país (Chile 🇨🇱 / Argentina 🇦🇷) con carga dinámica.
-- Búsqueda de ciudades en tiempo real con `v-model`.
-- Detalle semanal con forecast de 7 días, promedio, tipo de semana y alertas.
-- Caché por país en `localStorage` con TTL de 6 horas (logs en consola).
-- Theme de cards según hora del día (día / tarde / noche).
-- Tema global **dark/light** configurable por usuario.
-- Soporte de unidades **°C / °F** configurables en la vista de preferencias.
-- Login simulado con Vuex (usuarios mock) y rutas protegidas (`/favoritos`, `/preferencias`).
-- Navbar con estado de sesión (nombre, login/logout, accesos a secciones de usuario).
-- Lista de **lugares favoritos** por usuario autenticado.
-- Clima actual de capitales en el Home con navegación directa al detalle.
-- Noticias de clima en español usando **NewsAPI.org** (`/everything`, filtro por clima y últimos 7 días).
-- Arquitectura multi-país extensible a más mercados (COUNTRIES en `weatherConfig.js`).
+Toda la lógica de clima se centraliza en `src/utils/weatherHelpers.js`:
 
----
-
-## 🌐 API de clima utilizada
-
-**Open-Meteo** — API meteorológica gratuita y sin registro.
-
-- 📄 Documentación: https://open-meteo.com/en/docs  
-- 🔗 URL base: `https://api.open-meteo.com/v1/forecast`
-
-La app consulta todas las ciudades en **una sola petición** por país, enviando los arrays de latitudes y longitudes separados por coma:
-
-```text
-?latitude=...&longitude=...
-&current=temperature_2m,weather_code
-&daily=weather_code,temperature_2m_max,temperature_2m_min
-&timezone=America/Santiago
-```
-
-Para cada país se configura el endpoint final en `weatherConfig.js`, incluyendo timezone, capital y lista de ciudades.
-
----
-
-## 📰 API de noticias utilizada
-
-**NewsAPI.org** — Servicio de noticias para consultar artículos en tiempo real.
-
-> Importante: NewsAPI no permite usar la API key directamente desde producción abierta.  
-> En este proyecto se utiliza solo para fines educativos en entorno local.
-
-- 📄 Documentación general: https://newsapi.org/docs  
-- 📄 Endpoint usado: `/v2/everything`  
-- 🔐 API key: se lee desde `import.meta.env.VITE_NEWS_API_KEY` (definida en `.env.local`)
-
-Ejemplo de consulta simplificada:
-
-```http
-GET https://newsapi.org/v2/everything
-  ?q=(clima OR meteorología OR pronóstico)
-    AND (lluvia OR tormenta OR sequía OR inundación OR nieve OR granizo
-         OR "ola de calor" OR ciclón OR huracán)
-  &language=es
-  &from=YYYY-MM-DD    # últimos 7 días
-  &sortBy=publishedAt
-  &pageSize=20
-  &apiKey=TU_API_KEY
-```
-
-La vista `NewsView.vue` consume esta API con **Axios**, muestra tarjetas de noticias (imagen + título + descripción) y limita la cantidad de artículos renderizados para mantener la interfaz limpia.
-
----
-
-## 📊 Cálculo de estadísticas (`getForecastStats`)
-
-Las estadísticas se calculan sobre los **próximos 7 días** del pronóstico (`forecast.slice(1, 8)`), excluyendo el día actual.
-
-### Temperatura promedio semanal
-
-\[
-avgTemp = \frac{\sum_{i=1}^{7} \left(\frac{maxTemp[i] + minTemp[i]}{2}\right)}{7}
-\]
-
-Se redondea a un decimal y se usa tanto en la tarjeta de detalle como en la sección “Resumen semanal”.
-
-### Alertas automáticas
-
-| Alerta              | Condición                               |
-|---------------------|-----------------------------------------|
-| 🌡️ **Calor**        | Al menos un día con máxima ≥ 25°C       |
-| 🧊 **Frío**         | Al menos un día con mínima ≤ 5°C        |
-| 🌧️ **Semana lluviosa** | 3 o más días con códigos de lluvia (51–99) |
-
-### Tipo de semana
-
-Se cuentan días despejados (0–1), nublados (2–3, 45–48) y lluviosos (51–99).  
-La categoría con más días define la etiqueta: *Semana despejada*, *Semana nublada*, *Semana lluviosa* o *Semana variada*.
-
----
-
-## 🎨 Arquitectura de estilos — SCSS
-
-Paleta principal:
-
-| Variable             | Color       | Uso                      |
-|----------------------|------------|--------------------------|
-| `$color-primary`     | `#4a9edd`  | Botones y acentos        |
-| `$color-bg`          | `#0a1628`  | Fondo body               |
-| `$color-text`        | `#ffffff`  | Texto principal          |
-| `$color-text-muted`  | `#a8c4e0`  | Texto secundario         |
-| `$color-border`      | `#2a5a8c`  | Bordes de cards          |
-
-Themes de cards por hora del día (modo dark):
-
-| Theme            | Horario       | Gradiente                             |
-|------------------|--------------|----------------------------------------|
-| `theme-day`      | 06:00 – 17:59| Azul oscuro `#1a3a5c → #0f2744`        |
-| `theme-afternoon`| 18:00 – 20:59| Naranja `#f59e0b → #9a3412`            |
-| `theme-night`    | 21:00 – 05:59| Noche `#1e293b → #020617`              |
-
-El tema global (`app-theme-dark` / `app-theme-light`) se combina con estos themes por hora para generar variantes claras/oscuro de cada tarjeta, manteniendo el contraste y la armonía visual.
-
-Convención de nombres **BEM**:
-
-```scss
-.weather-card { ... }
-.weather-card__icon { ... }
-.weather-card__title { ... }
-
-.news-card { ... }
-.news-card__image { ... }
-.news-card__body { ... }
-```
-
----
-
-## 🌍 Arquitectura multi-país (`weatherConfig.js`)
-
-Toda la configuración de cada país vive en el objeto `COUNTRIES`. Agregar un país nuevo es tan simple como añadir una entrada:
+### Mapeo de códigos de clima
 
 ```js
-const COUNTRIES = {
-  chile: {
-    label:    'Chile 🇨🇱',
-    capital:  'Santiago',
-    cacheKey: 'weatherCache_chile',
-    timezone: 'America/Santiago',
-    cities:   ['Arica', 'Iquique', ...],
-    apiUrl:   'https://api.open-meteo.com/v1/forecast?...',
-  },
-  argentina: {
-    label:    'Argentina 🇦🇷',
-    capital:  'Buenos Aires',
-    cacheKey: 'weatherCache_argentina',
-    timezone: 'America/Argentina/Buenos_Aires',
-    cities:   ['Buenos Aires', 'Córdoba', ...],
-    apiUrl:   'https://api.open-meteo.com/v1/forecast?...',
-  },
+export const WEATHER_CODES = {
+  0:  { label: 'Despejado', emoji: '☀️' },
+  1:  { label: 'Casi despejado', emoji: '🌤️' },
+  2:  { label: 'Parcialmente nublado', emoji: '⛅' },
+  3:  { label: 'Nublado', emoji: '☁️' },
+  45: { label: 'Con niebla', emoji: '🌫️' },
+  48: { label: 'Niebla helada', emoji: '🌫️' },
+  51: { label: 'Llovizna suave', emoji: '🌦️' },
+  53: { label: 'Llovizna', emoji: '🌦️' },
+  55: { label: 'Llovizna fuerte', emoji: '🌧️' },
+  61: { label: 'Lluvia débil', emoji: '🌧️' },
+  63: { label: 'Lluvia', emoji: '🌧️' },
+  65: { label: 'Lluvia fuerte', emoji: '🌧️' },
+  71: { label: 'Nieve débil', emoji: '🌨️' },
+  73: { label: 'Nieve', emoji: '❄️' },
+  75: { label: 'Mucha nieve', emoji: '❄️' },
+  77: { label: 'Granitos de nieve', emoji: '🌨️' },
+  80: { label: 'Chubascos débiles', emoji: '🌦️' },
+  81: { label: 'Chubascos', emoji: '🌧️' },
+  82: { label: 'Chubascos fuertes', emoji: '⛈️' },
+  85: { label: 'Chubascos débiles de nieve', emoji: '🌨️' },
+  86: { label: 'Chubascos de nieve fuertes', emoji: '❄️' },
+  95: { label: 'Tormenta eléctrica', emoji: '⛈️' },
+  96: { label: 'Tormenta eléctrica con algo de granizo', emoji: '⛈️' },
+  99: { label: 'Tormenta eléctrica con mucho granizo', emoji: '⛈️' },
+}
+
+export function getWeather(code) {
+  return WEATHER_CODES[code] ?? { label: 'Desconocido', emoji: '🌡️' }
 }
 ```
 
-### Caché independiente por país
+### Normalización de datos por país
 
-| País       | Clave localStorage        | TTL    |
-|-----------|---------------------------|--------|
-| Chile     | `weatherCache_chile`      | 6 horas|
-| Argentina | `weatherCache_argentina`  | 6 horas|
-| Noticias  | `newsCache` (opcional)    | 3 horas|
+```js
+export function normalizeLocations(rawLocations, countryKey) {
+  const cfg = COUNTRIES[countryKey]
+  if (!cfg) return []
+
+  return rawLocations.map((loc, i) => ({
+    city: (cfg.cities ?? [])[i] ?? `Ubicación ${i + 1}`,
+    temp: loc.current.temperature_2m,
+    code: loc.current.weather_code,
+    maxTemp: loc.daily.temperature_2m_max,
+    minTemp: loc.daily.temperature_2m_min,
+    forecast: loc.daily.time.map((date, j) => ({
+      date,
+      code: loc.daily.weather_code[j],
+      maxTemp: loc.daily.temperature_2m_max[j],
+      minTemp: loc.daily.temperature_2m_min[j],
+    })),
+  }))
+}
+```
+
+### Estadísticas y alertas semanales
+
+La función `getForecastStats(forecast)` calcula:
+
+- Temperatura promedio semanal.
+- Conteos de días calurosos, fríos y lluviosos.
+- **Alertas**:
+  - Ola de calor (máximas ≥ 25°C).
+  - Ola de frío (mínimas ≤ 5°C).
+  - Semana lluviosa (3+ días de lluvia).
+- **Tipo de semana**: despejada, nublada, lluviosa o variada.
+
+Estos datos se muestran en la vista de detalle (`/detalle/:country/:city`) en la sección “Resumen semanal”.
+
+---
+
+## 💾 Caché de clima en localStorage
+
+Para evitar llamadas innecesarias a la API, se usa un caché simple en `localStorage` por país:
+
+```js
+export function saveWeatherData(countryKey, data) {
+  const cfg = COUNTRIES[countryKey]
+  if (!cfg) return
+  const payload = { timestamp: Date.now(), data }
+  localStorage.setItem(cfg.cacheKey, JSON.stringify(payload))
+}
+```
+
+```js
+export function loadWeatherData(countryKey) {
+  const cfg = COUNTRIES[countryKey]
+  if (!cfg) return null
+
+  const raw = localStorage.getItem(cfg.cacheKey)
+  if (!raw) return null
+
+  try {
+    const { timestamp, data } = JSON.parse(raw)
+    const age = Date.now() - timestamp
+    if (age > CACHE_TTL_MS) {
+      localStorage.removeItem(cfg.cacheKey)
+      return null
+    }
+    return data
+  } catch (e) {
+    localStorage.removeItem(cfg.cacheKey)
+    return null
+  }
+}
+```
+
+El shape cacheado incluye ahora el campo `code` para cada ciudad, de modo que tanto la vista de tarjetas como la vista de detalle usan los mismos datos normalizados.
 
 ---
 
-## 🔐 Autenticación y preferencias
+## 🎨 Temas visuales (light/dark)
 
-Para esta iteración se agregó un sistema de login simulado utilizando **Vuex 4**:
+La app soporta **modo claro y oscuro**, usando CSS variables y clases en el wrapper principal:
 
-- Módulo `auth` con:
-  - `state.user`, `state.isAuthenticated`.
-  - Mutaciones `SET_USER`, `LOGOUT`, `UPDATE_PREFERENCES`.
-  - Getters `isAuthenticated`, `currentUser`, `favorites`, `preferences`.
-- Login contra un arreglo de usuarios mock (`mockUsers`), sin backend real.
-- Rutas protegidas (`/favoritos`, `/preferencias`) usando guards de **Vue Router** (`meta.requiresAuth` + `beforeEach`).
+```css
+.app-theme-dark {
+  background-color: #050816;
+  color: #f5f5f5;
+  --card-text-primary: #ffffff;
+  --card-text-secondary: rgba(255, 255, 255, 0.65);
+  --card-link: #60a5fa;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(5, 8, 22, 0.85);
+  --nav-text: #f5f5f5;
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --nav-btn-border: #ffffff;
+  --nav-btn-text: #ffffff;
+  --fav-star-empty: rgba(255,255,255, 0.3);
+  --fav-star-full: #f1c40f;
+}
 
-Preferencias de usuario:
+.app-theme-light {
+  background-color: #f0f4f8;
+  color: #1a2a3a;
+  --card-text-primary: #1e293b;
+  --card-text-secondary: #475569;
+  --card-link: #2563eb;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --nav-text: #1a2a3a;
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-btn-border: #1a2a3a;
+  --nav-btn-text: #1a2a3a;
+  --fav-star-empty: #cbd5e1;
+  --fav-star-full: #f59e0b;
+}
+```
 
-- Unidad de temperatura: °C / °F.
-- Tema global: claro / oscuro.
+Las tarjetas (`.weather-card`, `.home-card`) y vistas (`detail-card`, formularios, navbar) se adaptan automáticamente a estas variables. Se utiliza SASS para generar gradientes específicos para **día**, **tarde** y **noche** tanto en light como en dark mode.
 
-Las preferencias se guardan en Vuex y se consumen en:
+---
 
-- `WeatherCard.vue` y `LugarDetalleView.vue` para formatear °C/°F.  
-- `HomeView.vue` para mostrar capitales en la unidad elegida.  
-- `App.vue` para aplicar clases `app-theme-light` / `app-theme-dark` y combinar con los temas por hora (day/afternoon/night).
+## 🔐 Autenticación, favoritos y preferencias
+
+El proyecto incluye un módulo de autenticación simple con Vuex:
+
+- Login ficticio (sin backend real), pensado como demo de flujo de login/logout.
+- Rutas protegidas para secciones como **Favoritos**.
+- Gestión de **favoritos**: el usuario puede marcar ciudades como favoritas desde las tarjetas, almacenando esa preferencia en el store.
+- **Preferencias**:
+  - Unidad de temperatura (°C/°F).
+  - Tema visual (claro/oscuro).
+  - Esas preferencias se leen desde el Vuex store en componentes como `LugarDetalleView` para mostrar correctamente las unidades y estilos.
 
 ---
 
-## 🏙️ Ciudades cubiertas
+## 🗺️ Rutas principales
 
-**Chile 🇨🇱 (16 ciudades)**
-Arica · Iquique · Antofagasta · Copiapó · La Serena · Valparaíso · Santiago · Rancagua · Talca · Chillán · Concepción · Temuco · Valdivia · Puerto Montt · Coyhaique · Punta Arenas
-
-**Argentina 🇦🇷 (24 ciudades)**
-Buenos Aires · Córdoba · Rosario · Posadas · San Salvador de Jujuy · Catamarca · Formosa · Resistencia · Paraná · San Juan · San Luis · Santa Rosa · Neuquén · Rawson · Viedma · Río Gallegos · Ushuaia · Bahía Blanca · Sgo. del Estero · Tucumán · Salta · La Plata · Mendoza · La Rioja
-
-**Bolivia 🇧🇴 (9 ciudades)**
-Cobija · Trinidad · El Alto · La Paz · Cochabamba · Santa Cruz de la Sierra · Oruro · Sucre · Potosí
-
-**Perú 🇵🇪 (8 ciudades)**
-Piura · Chiclayo · Trujillo · Huánuco · Lima · Huancayo · Cusco · Arequipa
-
-**Colombia 🇨🇴 (8 ciudades)**
-Santa Marta · Barranquilla · Cartagena · Medellín · Bucaramanga · Cúcuta · Bogotá · Cali
-
-**Ecuador 🇪🇨 (8 ciudades)**
-Esmeraldas · Ibarra · Quito · Manta · Ambato · Guayaquil · Cuenca · Loja
-
-**Venezuela 🇻🇪 (8 ciudades)**
-Maracaibo · Barquisimeto · Valencia · Maracay · Caracas · Barcelona · Ciudad Bolívar · Ciudad Guayana
-
-**Paraguay 🇵🇾 (8 ciudades)**
-Pedro Juan Caballero · Concepción · San Lorenzo · Asunción · Capiatá · Ciudad del Este · Encarnación · Pilar
-
-**Uruguay 🇺🇾 (8 ciudades)**
-Artigas · Salto · Paysandú · Fray Bentos · Durazno · Minas · Montevideo · Punta del Este
-
-**Brasil 🇧🇷 (8 ciudades)**
-Belém · Fortaleza · Recife · Salvador · Brasília · Rio de Janeiro · São Paulo · Porto Alegre
-
-**México 🇲🇽 (8 ciudades)**
-Tijuana · Hermosillo · Chihuahua · Monterrey · Guadalajara · Ciudad de México · Puebla · Mérida
+| Ruta                           | Descripción                                                                 |
+|--------------------------------|-----------------------------------------------------------------------------|
+| `/`                            | Home (landing informativa)                                                 |
+| `/pronosticos`                | Lista de pronósticos destacados (tarjetas por país/ciudad)                 |
+| `/detalle/:country/:city`     | Detalle de un lugar: clima actual, próximos 7 días, estadísticas y alertas |
+| `/news`                        | Noticias relacionadas (NewsAPI)                                            |
+| `/login`                       | Vista de login                                                             |
+| `/favoritos`                  | Ciudades favoritas del usuario (requiere login)                            |
+| `/preferencias`               | Configuración de unidad, tema y otras preferencias                         |
+| `/about`                      | Sección “Quienes somos” / información del proyecto                         |
 
 ---
-**Total: 11 países · 103 ciudades cubiertas**
-
-
-### Caché independiente por país
-
-| País       | Clave localStorage          | TTL    |
-|------------|-----------------------------|--------|
-| Chile      | `weatherCache_chile`        | 6 horas|
-| Argentina  | `weatherCache_argentina`    | 6 horas|
-| Bolivia    | `weatherCache_bolivia`      | 6 horas|
-| Perú       | `weatherCache_peru`         | 6 horas|
-| Colombia   | `weatherCache_colombia`     | 6 horas|
-| Ecuador    | `weatherCache_ecuador`      | 6 horas|
-| Venezuela  | `weatherCache_venezuela`    | 6 horas|
-| Paraguay   | `weatherCache_paraguay`     | 6 horas|
-| Uruguay    | `weatherCache_uruguay`      | 6 horas|
-| Brasil     | `weatherCache_brasil`       | 6 horas|
-| México     | `weatherCache_mexico`       | 6 horas|
 
 ## 🏃 Cómo correr el proyecto localmente
 
+### Requisitos
+
+- Node.js 18+ (recomendado)
+- npm o pnpm
+
+### Pasos
+
 ```bash
-# Clonar el repositorio
-git clone https://github.com/Mackelf/weather-frontend-m2.git
+# 1. Clonar el repositorio
+git clone https://github.com/Mackelf/BootCampWeather.git
+cd BootCampWeather
 
-# Entrar a la carpeta
-cd weather-frontend-m2
-
-# Instalar dependencias
+# 2. Instalar dependencias
 npm install
 
-# Crear archivo de variables locales (.env.local) con tu API key de NewsAPI
+# 3. Configurar variables de entorno (NewsAPI)
 echo "VITE_NEWS_API_KEY=TU_API_KEY_AQUI" > .env.local
 
-# Correr en modo desarrollo
+# 4. Ejecutar en modo desarrollo
 npm run dev
 ```
 
-> ⚠️ No instalar en carpetas sincronizadas con Google Drive.  
-> Usar una carpeta local estándar.
-
----
----
-
-## 📝 Notas de versión (iteración actual)
-
-### Iteración: Autenticación, preferencias y noticias
-
-- Agregado login simulado con **Vuex 4**:
-  - Módulo `auth` con usuario actual, estado `isAuthenticated` y preferencias.
-  - Rutas protegidas `/favoritos` y `/preferencias` mediante guards de Vue Router.
-  - Navbar con saludo al usuario, enlaces a secciones privadas y botón de logout.
-
-- Preferencias de usuario:
-  - Unidad de temperatura configurable: **°C / °F**.
-  - Tema global de la app: **oscuro / claro**.
-  - Integración de preferencias en Home, WeatherCard y vista de detalle.
-
-- Temas visuales:
-  - Combinación de tema global (`app-theme-dark` / `app-theme-light`) con temas por hora (`theme-day`, `theme-afternoon`, `theme-night`).
-  - Nuevos gradientes para modo claro basados en los gradientes existentes.
-
-- Noticias de clima:
-  - Migración desde feed RSS a **NewsAPI.org** usando Axios.
-  - Endpoint `/v2/everything` filtrado por palabras clave de clima en español y fecha de los últimos 7 días.
-  - Vista `NewsView.vue` con tarjetas de noticias, imágenes recortadas y cantidad limitada de artículos.
-
-- Documentación:
-  - README actualizado con nuevas rutas, estructura de archivos, APIs usadas y pasos para configurar `.env.local` con `VITE_NEWS_API_KEY`.
-
-  ### Iteración: Expansión de cobertura geográfica
-
-- Agregados 9 nuevos países: Bolivia 🇧🇴, Perú 🇵🇪, Colombia 🇨🇴, Ecuador 🇪🇨, Venezuela 🇻🇪, Paraguay 🇵🇾, Uruguay 🇺🇾, Brasil 🇧🇷 y México 🇲🇽.
-- Total: 11 países y 103 ciudades cubiertas con Open-Meteo.
-- Caché independiente por país con TTL de 6 horas para cada uno.
-- Arquitectura `weatherConfig.js` extensible sin modificar la lógica de vistas.
-- Registro de usuario con persistencia en `localStorage` agregado en `/registro`.
-- Deploy configurado en GitHub Pages desde rama `gh-pages`.
-  
-## 👤 Autor
-
-Mario Canto  
-Técnico en T.I. reconvertido a **Frontend Developer**.  
-Bootcamp Talento Digital — Módulo Frontend  
-GitHub: [@Mackelf](https://github.com/Mackelf)
+Luego abre la URL que Vite indique en consola (por defecto `http://localhost:5173`).
 
 ---
 
-## 📦 Dependencias externas
+## 📸 Capturas (sugerido para el portfolio)
 
-- [Open-Meteo](https://open-meteo.com/) — datos meteorológicos, sin API key  
-- [NewsAPI.org](https://newsapi.org/) — noticias de clima en español  
-- [Bootstrap 5](https://getbootstrap.com/) — grilla y utilidades  
-- [Bootstrap Icons](https://icons.getbootstrap.com/) — íconos del tiempo  
+
+```md
+
+Vista principal con tarjetas de clima y selector de país.
+![Imagen](docs/MainPronostico.png)
+
+Detalle de una ciudad mostrando clima actual, próximos 7 días y estadísticas/alertas.
+![Imagen7dias](docs/ProximosDias.png)
+
+Lista de ciudades favoritas con tema oscuro activado.
+![favoritos](docs/Favoritos.png)
+```
+
+---
+
+## 📌 Estado del proyecto
+
+- ✅ SPA completa en Vue 3 con Vue Router.
+- ✅ Consumo de API real de clima (Open-Meteo) con Axios.
+- ✅ Manejo de estado global con Vuex (auth, preferencias, favoritos).
+- ✅ Estadísticas y alertas meteorológicas basadas en datos reales.
+- ✅ Temas claro/oscuro, estilos refinados con SASS y CSS variables.
+- ✅ Caché de datos de clima por país con TTL básico en `localStorage`.
+- ✅ Documentación lista para portafolio (este README).
+
+---
+
+## 📄 Licencia
+
+Proyecto creado como parte del Bootcamp Talento Digital. Uso libre para fines de portafolio y aprendizaje.
