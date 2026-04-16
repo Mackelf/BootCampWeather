@@ -1,20 +1,3 @@
-// Contenedor principal
-.app-wrapper {
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-// Estructura Base de la Tarjeta (Compartida)
-.weather-card {
-  border-radius: 0.75rem;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
-  
-  h1, h2, h3, h4, h5 {
-    margin-bottom: 0.5rem;
-  }
-}
-
 // ==========================================
 // MODO DARK
 // ==========================================
@@ -24,28 +7,39 @@
   --card-link: #60a5fa;
   --card-border: rgba(255, 255, 255, 0.1);
   background-color: #050816;
-}
+  color: #f5f5f5;
+
+  // IMPORTANTE: .weather-card debe estar DENTRO de las llaves del tema
   .weather-card {
-    color: #ffffff !important;
+    color: var(--card-text-primary) !important;
 
     &.theme-day {
       background: $card-bg-day;
-      border-color: rgba(255, 255, 255, 0.08);
+      border-color: var(--card-border);
     }
     &.theme-afternoon {
       background: $card-bg-afternoon;
-      border-color: rgba(255, 255, 255, 0.08);
+      border-color: var(--card-border);
     }
     &.theme-night {
       background: $card-bg-night;
       border-color: rgba(255, 255, 255, 0.12);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
+
+    // Aquí aplicas la variable a los textos secundarios
+    .weather-desc, .temp-range {
+      color: var(--card-text-secondary) !important;
+    }
+    
+    .btn-detalles {
+      color: var(--card-link) !important;
+    }
   }
 }
 
 // ==========================================
-// MODO LIGHT (Refactorizado)
+// MODO LIGHT
 // ==========================================
 .app-theme-light {
   --card-text-primary: #1a2a3a;
@@ -53,17 +47,22 @@
   --card-link: #2563eb;
   --card-border: rgba(0, 0, 0, 0.08);
   background-color: #f0f4f8;
-}
+  color: #1a2a3a;
+
   .weather-card {
-    color: #1a2a3a !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Sombra suave en lugar de borde fuerte
+    color: var(--card-text-primary) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 
     h1, h2, h3, h4, h5 {
       color: #0f172a;
     }
 
-    .home.muted {
-      color: #555 !important;
+    .weather-desc, .temp-range {
+      color: var(--card-text-secondary) !important;
+    }
+
+    .btn-detalles {
+      color: var(--card-link) !important;
     }
 
     footer {
@@ -72,23 +71,22 @@
       border-radius: 0 0 0.75rem 0.75rem;
     }
 
-    // Usamos colores mucho más pasteles para que el texto oscuro sea legible
     &.theme-day {
-      $day-light: lighten($card-day-top, 45%); // Subí de 25% a 45% para mayor claridad
+      $day-light: lighten($card-day-top, 45%);
       background: linear-gradient(180deg, white 0%, $day-light 100%);
-      border-color: rgba(0, 0, 0, 0.06);
+      border-color: var(--card-border);
     }
 
     &.theme-afternoon {
       $aft-light: lighten($card-afternoon-top, 40%);
       background: linear-gradient(180deg, white 0%, $aft-light 100%);
-      border-color: rgba(0, 0, 0, 0.06);
+      border-color: var(--card-border);
     }
 
     &.theme-night {
       $night-light: lighten($card-night-top, 50%);
       background: linear-gradient(180deg, #f1f5f9 0%, $night-light 100%);
-      border-color: rgba(0, 0, 0, 0.08);
+      border-color: var(--card-border);
     }
   }
 }
