@@ -339,7 +339,7 @@ Luego abre la URL que Vite indique en consola (por defecto `http://localhost:517
 ## 📸 Capturas (sugerido para el portfolio)
 
 
-```md
+
 
 Vista principal con tarjetas de clima y selector de país.
 ![Imagen](docs/MainPronostico.png)
@@ -349,7 +349,7 @@ Detalle de una ciudad mostrando clima actual, próximos 7 días y estadísticas/
 
 Lista de ciudades favoritas con tema oscuro activado.
 ![favoritos](docs/Favoritos.png)
-```
+
 
 ---
 
