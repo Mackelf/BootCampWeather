@@ -123,10 +123,9 @@ onMounted(loadAllCapitales)
                 <div class="home-muted small">{{ capital.countryLabel }}</div>
                 <div class="fw-bold fs-5">{{ capital.city }}</div>
               </div>
-              <i
-                :class="capital.iconClass"
-                style="font-size: 2.5rem; color: #4a9edd; flex-shrink: 0"
-              ></i>
+             <i :class="capital.iconClass"
+   :style="{ fontSize: '2.5rem', color: 'var(--card-link)', flexShrink: 0 }">
+</i>
             </div>
 
             <!-- Temperatura grande + descripción inline -->
@@ -192,48 +191,59 @@ onMounted(loadAllCapitales)
 
 <style scoped lang="scss">
 .home-card {
-  background: linear-gradient(180deg, #1a3a5c 0%, #0f2744 100%);
-  border: 1px solid #2a5a8c;
+  // En lugar de azul fijo, usamos el fondo del tema oscuro por defecto 
+  // pero permitimos que las variables CSS lo controlen
+  background: var(--card-bg-gradient, linear-gradient(180deg, #1a3a5c 0%, #0f2744 100%));
+  border: 1px solid var(--card-border);
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
-  color: #ffffff;
+  color: var(--card-text-primary);
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
+
+  // En modo claro, queremos que la card se vea blanca/gris suave
+  .app-theme-light & {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
 }
 
 .home-muted {
-  color: #a8c4e0;
+  color: var(--card-text-secondary);
 }
 
 .btn-home-primary {
   background: transparent;
-  border: 1px solid #4a9edd;
-  color: #4a9edd;
+  border: 1px solid var(--card-link);
+  color: var(--card-link);
   border-radius: 0.4rem;
   padding: 0.3rem 0.8rem;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 
   &:hover {
-    background: #4a9edd;
+    background: var(--card-link);
     color: #ffffff;
   }
 }
 
 .btn-home-secondary {
   background: transparent;
-  border: 1px solid #a8c4e0;
-  color: #a8c4e0;
+  border: 1px solid var(--card-text-secondary);
+  color: var(--card-text-secondary);
   border-radius: 0.4rem;
   padding: 0.3rem 0.8rem;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 
   &:hover {
-    background: #a8c4e0;
-    color: #0a1628;
+    background: var(--card-text-secondary);
+    // Cambiamos el color del texto en hover dependiendo del tema
+    .app-theme-light & { color: white; }
+    .app-theme-dark & { color: #0a1628; }
   }
 }
 </style>
