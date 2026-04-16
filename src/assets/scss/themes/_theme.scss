@@ -9,9 +9,9 @@
   --card-border: rgba(255, 255, 255, 0.1);
 
   // Contrato para el Navbar
-  --nav-bg: rgba(255, 255, 255, 0.9); // Un blanco semitransparente (Glassmorphism)
-  --nav-text: #1e293b;        // Texto gris oscuro legible
-  --nav-border: rgba(0, 0, 0, 0.08); // Borde inferior suave
+ --nav-bg: rgba(5, 8, 22, 0.85); // Oscuro con transparencia
+  --nav-text: #f5f5f5;
+  --nav-border: rgba(255, 255, 255, 0.1);
 
   .weather-card, .home-card {
     &.theme-day { --card-bg: #{$card-bg-day-dark}; }
@@ -29,9 +29,9 @@
   --card-border: rgba(0, 0, 0, 0.08);
 
 // Contrato para el Navbar
-  --nav-bg: #1a1d2e;          // Un gris azulado oscuro (puedes usar tu $color-bg original)
-  --nav-text: #f5f5f5;        // Texto blanco
-  --nav-border: transparent;  // Sin borde inferior
+--nav-bg: rgba(255, 255, 255, 0.8); // Blanco con transparencia
+  --nav-text: #1a2a3a;              // Texto oscuro para legibilidad
+  --nav-border: rgba(0, 0, 0, 0.1);
 
   .weather-card, .home-card {
     // Aquí usamos los pasteles ($light-...)
