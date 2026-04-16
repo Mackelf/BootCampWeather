@@ -80,6 +80,7 @@ async function loadData() {
         const iconClass = getIconClass(loc.code)
         return {
           city: loc.city,
+          code: loc.code,
           description: wx.label.toUpperCase(),
           temp: loc.temp,
           minTemp: loc.minTemp,
