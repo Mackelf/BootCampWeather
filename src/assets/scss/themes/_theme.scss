@@ -15,6 +15,9 @@
   --nav-btn-border: #ffffff;
   --nav-btn-text: #ffffff;
 
+  --fav-star-empty: rgba(255,255,255, 0.3);
+  --fav-star-full: #f1c40f;
+
   .weather-card, .home-card {
     &.theme-day { --card-bg: #{$card-bg-day-dark}; }
     &.theme-afternoon { --card-bg: #{$card-bg-afternoon-dark}; }
@@ -36,6 +39,9 @@
   --nav-border: rgba(0, 0, 0, 0.1);
   --nav-btn-border: #1a2a3a;
   --nav-btn-text: #1a2a3a;
+
+  --fav-star-empty: #cbd5e1; // Gris azulado suave
+  --fav-star-full: #f59e0b;  // Naranja ambar (mejor contraste en blanco)
 
 
   .weather-card, .home-card {

@@ -1,0 +1,19 @@
+// scss/components/_inputs.scss o similar
+.search-input, .country-select {
+  background-color: var(--nav-bg) !important; // Usa el blanco/transparente del nav
+  color: var(--nav-text) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--card-link) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  &::placeholder {
+    color: var(--card-text-secondary);
+  }
+}

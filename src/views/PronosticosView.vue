@@ -125,22 +125,22 @@ function openDetails(lugar) {
 <template>
   <section class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2 class="mb-0">Pronósticos destacados</h2>
+      <h2 class="mb-0 text-theme-primary">Pronósticos destacados</h2>
 
-      <div class="d-flex gap-2">
+      <div class="d-flex flex-grow-1 justify-content-md-end gap-2">
         <input
           v-model="searchTerm"
           type="text"
-          class="form-control form-control-sm"
+          class="form-control-theme"
           placeholder="Buscar ciudad..."
-          style="max-width: 200px;"
+          
         />
       </div>
 
       <select
         v-model="currentCountry"
-        class="form-select form-select-sm"
-        style="max-width: 240px"
+        class="form-select-theme"
+       
       >
         <option
           v-for="(cfg, key) in COUNTRIES"
@@ -190,3 +190,47 @@ function openDetails(lugar) {
     </div>
   </section>
 </template>
+<style scoped lang="scss">
+.text-theme-primary {
+  color: var(--card-text-primary);
+  transition: color 0.3s ease;
+}
+
+.form-control-theme, .form-select-theme {
+  background-color: var(--nav-bg); // Usamos el fondo del nav que ya es reactivo
+  color: var(--nav-text);
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  max-width: 220px;
+
+  &::placeholder {
+    color: var(--card-text-secondary);
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--card-link);
+    box-shadow: 0 0 0 3px rgba(74, 158, 221, 0.2);
+  }
+
+  // En modo light, forzamos que el texto sea oscuro si el nav-bg es muy claro
+  .app-theme-light & {
+    background-color: #ffffff; 
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Estilo para el mensaje de "No resultados"
+.text-muted {
+  color: var(--card-text-secondary) !important;
+}
+
+// Loader reactivo
+.loading-text {
+  color: var(--card-text-primary);
+}
+</style>

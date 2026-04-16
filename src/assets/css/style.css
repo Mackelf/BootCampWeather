@@ -66,6 +66,23 @@ body {
   font-weight: 500;
 }
 
+.search-input, .country-select {
+  background-color: var(--nav-bg) !important;
+  color: var(--nav-text) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease;
+}
+.search-input:focus, .country-select:focus {
+  outline: none;
+  border-color: var(--card-link) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.search-input::placeholder, .country-select::placeholder {
+  color: var(--card-text-secondary);
+}
+
 .favorite-card {
   background: linear-gradient(180deg, #1a3a5c 0%, #0f2744 100%);
   border: 1px solid #2a5a8c;
@@ -163,6 +180,33 @@ body {
   color: #f59e0b;
 }
 
+/* scss/components/_weather-card.scss */
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--fav-star-empty);
+  font-size: 1.2rem;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.favorite-btn:hover {
+  transform: scale(1.15);
+  color: var(--fav-star-full);
+}
+.favorite-btn.is-favorite {
+  color: var(--fav-star-full);
+}
+.app-theme-dark .favorite-btn.is-favorite {
+  filter: drop-shadow(0 0 4px rgba(241, 196, 15, 0.3));
+}
+.favorite-btn:focus {
+  outline: none;
+}
+
 .news-card {
   background: linear-gradient(180deg, #1a3a5c 0%, #0f2744 100%);
   border: 1px solid #2a5a8c;
@@ -202,6 +246,8 @@ body {
   --nav-border: rgba(255, 255, 255, 0.1);
   --nav-btn-border: #ffffff;
   --nav-btn-text: #ffffff;
+  --fav-star-empty: rgba(255,255,255, 0.3);
+  --fav-star-full: #f1c40f;
 }
 .app-theme-dark .weather-card.theme-day, .app-theme-dark .home-card.theme-day {
   --card-bg: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
@@ -225,6 +271,8 @@ body {
   --nav-border: rgba(0, 0, 0, 0.1);
   --nav-btn-border: #1a2a3a;
   --nav-btn-text: #1a2a3a;
+  --fav-star-empty: #cbd5e1;
+  --fav-star-full: #f59e0b;
 }
 .app-theme-light .weather-card.theme-day, .app-theme-light .home-card.theme-day {
   --card-bg: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);

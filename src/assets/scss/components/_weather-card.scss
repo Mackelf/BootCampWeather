@@ -83,3 +83,37 @@ border: 1px solid var(--card-border);
     color: #f59e0b;
   }
 }
+
+/* scss/components/_weather-card.scss */
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  // Color por defecto (estrella vacía)
+  color: var(--fav-star-empty); 
+  font-size: 1.2rem;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.15);
+    color: var(--fav-star-full);
+  }
+
+  &.is-favorite {
+    color: var(--fav-star-full);
+    
+    // Sombra sutil para que resalte en el modo oscuro
+    .app-theme-dark & {
+      filter: drop-shadow(0 0 4px rgba(241, 196, 15, 0.3));
+    }
+  }
+
+  // Quitar el outline azul molesto de los botones en algunos navegadores
+  &:focus {
+    outline: none;
+  }
+}

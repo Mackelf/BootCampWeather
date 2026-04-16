@@ -76,8 +76,8 @@ const maxTempFormatted = computed(() =>
 
       <button
         v-if="showFavorite"
-        class="btn btn-favorite"
-        :class="{ active: isFavorite }"
+        class="favorite-btn"
+        :class="{ 'is-favorite': isFavorite }"
         :title="isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'"
         @click.stop="onToggleFavorite"
       >
