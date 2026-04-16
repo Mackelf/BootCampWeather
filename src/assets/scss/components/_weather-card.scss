@@ -4,11 +4,11 @@
   min-height: 260px;
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem 1.5rem;
-  color: $color-text;
+  color: var(--card-text-primary);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  border: 1px solid $color-border;
+border: 1px solid var(--card-border);
   background-color: transparent ! important;
 
   .card-header {
@@ -47,11 +47,11 @@
     margin-top: 0.25rem;
     font-size: 0.9rem;
     letter-spacing: 0.08em;
-    color: #475569 !important;
+    color: var(--card-text-secondary);
   }
 
   .temp-range {
-    color: #475569 !important;
+    color: var(--card-text-secondary);
   }
 
   .btn-detalles {
@@ -61,7 +61,7 @@
     color: #2563eb !important;
 
     &:hover {
-      color: #1d4ed8 !important;
+      filter: brightness(1.2);
     }
   }
 }

@@ -3,7 +3,7 @@
   border: 1px solid #2a5a8c;
   border-radius: 0.75rem;
   overflow: hidden;
-  color: #475569 !important;
+ color: var(--card-text-primary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
@@ -20,6 +20,6 @@
   }
 
   &__country {
-    color: #a8c4e0;
+    color: var(--card-text-secondary);
   }
 }
