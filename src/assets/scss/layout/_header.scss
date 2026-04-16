@@ -42,3 +42,26 @@
     // Puedes mantenerlo rojo, pero asegúrate de que el margen sea correcto
     margin-left: 10px;
   }
+
+  // scss/layout/_header.scss
+
+.btn-nav-auth {
+  // Usamos el contrato de variables que definimos antes
+  border: 1px solid var(--nav-btn-border) !important;
+  color: var(--nav-btn-text) !important;
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--nav-btn-border);
+    // Invertimos el color del texto al pasar el mouse
+    .app-theme-light & { color: #ffffff !important; }
+    .app-theme-dark & { color: #050816 !important; }
+  }
+}
+
+.nav-user-greeting {
+  // El saludo ahora cambiará de blanco a oscuro automáticamente
+  color: var(--nav-text) !important;
+  font-weight: 500;
+}

@@ -45,6 +45,27 @@ body {
   margin-left: 10px;
 }
 
+.btn-nav-auth {
+  border: 1px solid var(--nav-btn-border) !important;
+  color: var(--nav-btn-text) !important;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+.btn-nav-auth:hover {
+  background-color: var(--nav-btn-border);
+}
+.app-theme-light .btn-nav-auth:hover {
+  color: #ffffff !important;
+}
+.app-theme-dark .btn-nav-auth:hover {
+  color: #050816 !important;
+}
+
+.nav-user-greeting {
+  color: var(--nav-text) !important;
+  font-weight: 500;
+}
+
 .favorite-card {
   background: linear-gradient(180deg, #1a3a5c 0%, #0f2744 100%);
   border: 1px solid #2a5a8c;
@@ -179,6 +200,8 @@ body {
   --nav-bg: rgba(5, 8, 22, 0.85);
   --nav-text: #f5f5f5;
   --nav-border: rgba(255, 255, 255, 0.1);
+  --nav-btn-border: #ffffff;
+  --nav-btn-text: #ffffff;
 }
 .app-theme-dark .weather-card.theme-day, .app-theme-dark .home-card.theme-day {
   --card-bg: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
@@ -200,6 +223,8 @@ body {
   --nav-bg: rgba(255, 255, 255, 0.8);
   --nav-text: #1a2a3a;
   --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-btn-border: #1a2a3a;
+  --nav-btn-text: #1a2a3a;
 }
 .app-theme-light .weather-card.theme-day, .app-theme-light .home-card.theme-day {
   --card-bg: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);

@@ -60,7 +60,7 @@ const logout = () => {
           <!-- No logueado: mostrar botón Login -->
           <RouterLink
             v-if="!isAuth"
-            class="btn btn-outline-light btn-sm"
+            class="btn btn-nav-auth btn-sm"
             to="/login"
           >
             Login
@@ -68,7 +68,7 @@ const logout = () => {
 
           <!-- Logueado: saludo + logout -->
           <div v-else class="d-flex align-items-center gap-2">
-            <span class="text-light small">
+            <span class="nav-user-greeting small">
               Hola, {{ user?.name || 'Usuario' }}
             </span>
             <button
