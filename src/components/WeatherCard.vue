@@ -15,6 +15,10 @@ const props = defineProps({
   // nuevos
   isFavorite: { type: Boolean, default: false },
   showFavorite: { type: Boolean, default: false },
+  dotColor: {
+    type: String,
+    default: 'rgba(255, 255, 255, 0.7)',
+  },
 });
 
 const emit = defineEmits(['show-details', 'toggle-favorite']);
@@ -48,7 +52,7 @@ const maxTempFormatted = computed(() =>
 <template>
   <article class="card weather-card" :class="theme">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <span class="weather-dot"></span>
+      <span class="weather-dot" :style="{ backgroundColor: dotColor }" />
       <span class="text-uppercase">{{ city }}</span>
       <span class="small text-uppercase">{{ dateLabel }}</span>
     </div>

@@ -8,6 +8,7 @@ import {
   getWeather,
   getIconClass,
   getThemeByTime,
+  getDotColor,
   normalizeLocations,
   loadWeatherData,
   saveWeatherData,
@@ -89,6 +90,7 @@ async function loadData() {
           dateLabel: todayLabel,
           theme: getThemeByTime(),
           forecast: loc.forecast,
+          dotColor: getDotColor(loc.code),
         }
       })
 
@@ -176,6 +178,7 @@ function openDetails(lugar) {
               :max-temp="lugar.maxTemp"
               :icon-class="lugar.iconClass"
               :theme="lugar.theme"
+              :dot-color="lugar.dotColor" 
               :show-favorite="isAuthenticated"
               :is-favorite="isFavorite(lugar.city, currentCountry)"
               @show-details="openDetails(lugar)"

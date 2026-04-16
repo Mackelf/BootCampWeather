@@ -277,6 +277,20 @@ La app soporta **modo claro y oscuro**, usando CSS variables y clases en el wrap
 
 Las tarjetas (`.weather-card`, `.home-card`) y vistas (`detail-card`, formularios, navbar) se adaptan automáticamente a estas variables. Se utiliza SASS para generar gradientes específicos para **día**, **tarde** y **noche** tanto en light como en dark mode.
 
+### 🔴 Color coding del estado del clima (weather-dot)
+
+Cada tarjeta de pronóstico incluye un pequeño indicador visual (`.weather-dot`) cuyo color cambia dinámicamente según el código de clima de la ciudad, usando el helper `getDotColor(code)`:
+
+| Color | Estado |
+|-------|--------|
+| 🟡 Amarillo `#facc15` | Despejado / Casi despejado |
+| 🟠 Naranja `#f97316` | Parcialmente nublado |
+| ⚫ Gris `#6b7280` | Nublado / Niebla |
+| 🔵 Azul `#3b82f6` | Lluvia / Chubascos / Llovizna |
+| ⚪ Blanco `#e5e7eb` | Nieve |
+| 🟣 Violeta `#a855f7` | Tormenta eléctrica |
+
+El color se calcula una sola vez al normalizar los datos de la API y se pasa como prop a `WeatherCard.vue`, manteniéndose reactivo al tema sin necesidad de lógica adicional en el componente.
 ---
 
 ## 🔐 Autenticación, favoritos y preferencias

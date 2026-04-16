@@ -202,3 +202,31 @@ export function getThemeByTime() {
   if (hour >= 18 && hour < 21) return 'theme-afternoon'
   return 'theme-night'
 }
+
+export function getDotColor(code) {
+  if (code === 0 || code === 1) {
+    // Despejado / casi despejado
+    return '#facc15' // amarillo cálido
+  }
+  if (code === 2) {
+    // Parcialmente nublado
+    return '#f97316' // naranja
+  }
+  if (code === 3 || code === 45 || code === 48) {
+    // Nublado / niebla
+    return '#6b7280' // gris
+  }
+  if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) {
+    // Lluvia / chubascos
+    return '#3b82f6' // azul
+  }
+  if ([71, 73, 75, 77, 85, 86].includes(code)) {
+    // Nieve
+    return '#e5e7eb' // casi blanco
+  }
+  if ([95, 96, 99].includes(code)) {
+    // Tormenta
+    return '#a855f7' // violeta fuerte
+  }
+  return 'rgba(255, 255, 255, 0.7)' // fallback neutro
+}
